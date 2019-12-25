@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}
+    Makaleler
+{% endblock title %}    
+{% block body %}
+    <h3>Makaleler</h3>
+    <hr/>
+     <!--.sitelerin guvenlıgı için belirtilen içeikleri gorunmesi sakınca yoksa get kullan
+        . bu şekilde kendi tasarımımız formları kullanabiliriz, ve viewslarda oldugu gibi onları geri dict yapısı ile alabiliriz
+    -->
+    <form method="GET" style="display:flex;width:100%;margin:10px;" class="clearfix text-center">
+        {% csrf_token %} 
+        <input type="text" name="obje" style="float:left;width:50%;padding:5px;margin-left:auto;margin-right:3px;border-radius:10px;"/>
+        <button type="submit" class="btn btn-info" style="float:left;width:20%;margin-right:auto;">Ara</button>
+    </form>
+    {% if ARK %}
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Yazar</th>
+                <th>Başlık</th>
+                <th>tarih</th>
+                <th>İçerik</th>
+                <th><!--Buton--></th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            {% for article in ARK %}
+                <tr>
+                    <th>{{article.auther}}</th>
+                    <td>{{article.title}}</td>
+                    <td>{{article.created_date}}</td>
+                    <td>{{article.content|safe|truncatewords:5}}</td>
+                    <td class="text-center"><a class="btn btn-danger" href="{% url 'article:article' article.id %}">Devamını Oku</a></td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+        
+    {% else %}
+    <div class="alert alert-danger">Henüz bir Makale bulunmuyor</div>
+    {% endif %}
+{% endblock  %}

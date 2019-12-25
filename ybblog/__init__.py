@@ -1,0 +1,1 @@
+#Burası bir python Moduludur, yani tum bu klasörun bir python modulu oldugunu kanıtlamak için kullanılır,buna hiç karısmıcaz

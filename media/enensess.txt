@@ -1,0 +1,5 @@
+1- File'a gir -> aplacito liblary
+2- heat transfer module -->  run application
+3- compute --> bu bize ýsý iþini verir
+4- update mesh --> mesh verir
+5- model kýsmý 

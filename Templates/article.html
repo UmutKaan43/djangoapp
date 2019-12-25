@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block title %}
+    Detay - {{makale.title}}
+{% endblock title %}
+{% block body %}
+    <div class="col">
+
+        <!-- Title -->
+        <h1 class="mt-4">{{makale.title}}</h1>
+
+        <!-- Author -->
+        <p class="lead">         
+          {{makale.auther.username}}
+          Tarafindan Yayinlanmiş
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{makale.created_date}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        {% if makale.article_img %}
+        
+          <img class="img-fluid rounded" src="{{makale.article_img.url}}" alt=""> <!--url diyince resmin url adresine erişmiş oluruz -->
+        {% else %}
+        <div class="alert alert-warning"> <h5>Makalede resim bulunmuyor</h5></div>
+        {% endif %}
+        
+
+        <hr>
+
+        <!-- Post Content -->
+        {{makale.content|safe}}
+
+        <hr />
+          
+
+        <!-- Yorumlarda donucez -->
+        
+        
+
+
+        </div>
+        <div class="card my-4">
+          <h5 class="card-header">Yorum Yaz:</h5>
+          <div class="card-body">
+            <form method="POST" action="{% url 'article:comment' makale.id %}">
+            {% csrf_token %} <!-- Her formun altına olmasına dikkat et-->
+            <div class="form-group">
+              <label for="formGroupExampleInput">Kullanıcı Adı</label>
+              <input type="text" name="comment_auther" class="form-control" id="formGroupExampleInput" placeholder="Kullanıcı Adınızı Giriniz">
+            </div>
+              <div class="form-group">
+              <label for="textar">Yorumunuz</label>
+                <textarea id="textar" name="comment_content" class="form-control" rows="3" placeholder="Yorumunuz..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Gönder</button>
+            </form>
+          </div>
+        </div>
+
+        {% if comments %}
+        <h4>Yorumlar:</h4>
+        <hr/>
+          {% for comment in comments %}
+            <div class="media my-4">
+              <div class="media-body">
+                <h5 class="mt-0">{{comment.comment_auther}} ( {{comment.comment_date}})</h5>
+                {{comment.comment_content}}
+              </div>
+            </div>
+            <hr/>
+          {% endfor %}
+        {% else %}
+        <div class="alert alert-danger"><h5>Henüz bir yorum yapılmamıs</h5></div>
+        {% endif %}
+        
+{% endblock body %}

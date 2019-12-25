@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}
+    ana sayfa kısmı
+{% endblock  %}
+{% block body %}
+<div class="jumbotron text-center">
+    <h3>Yazılım Bilimi Bloğuna Hoşgeldiniz</h3>
+    <p>Bu blogta geliştiriciler olarak blog yazılarınızı paylaşabilirsiniz ve insanlara yardımcı olabilirsiniz.</p>
+</div>
+{% if numbers.bir == 1 %} <!--bu if bloglarında boşluk bırakma işlemını kullan onemli yoksa tam algılamıyor,numbers['bir'] şeklinde sozluk yapıısnı algılamaz numbers.bir dmeen gerek -->
+    <p>sayi yirmiye eşittir</p>
+{% else %}
+    <p>sayi yirmiye değildir</p>
+{% endif %}
+
+{% if request.user.is_authenticated %} <!-- request.user.is_authenticated bu özellik bize sistemde  bu user acıkmı suan diyor -->
+    <p>Giriş yapılmıs {{ request.user.username }}</p>
+{% else %}
+    <p>Giriş yoooq</p>
+{% endif %}
+
+{% endblock  %}
